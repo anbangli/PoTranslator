@@ -1,0 +1,114 @@
+﻿Poedit 自动机翻工具说明
+
+在编写支持多语言的程序时，通常源代码中的交互语句首先还是用英文编写，然后才为交互语句添加多语言支持机制（有多种机制可选）。
+
+一种常见的多语言支持机制是使用 gettext 工具提取源代码中的交互语句，生成 .po 文件，用于翻译成合适的语言，编译生成 .mo 文件。程序在运行过程时，再根据用户环境变量设置，调用相应语言版本的 .mo 文件中的文字信息，显示给用户。
+（详细参见：https://blog.csdn.net/zhaominyong/article/details/129385311）
+
+在这个多语言支持机制，很重要的一环是编辑 .po 文件，把英文词条翻译成特定的语言。.po 文件是纯文本文件，可以用普通的文本编辑器进行编辑。更方便的是使用 Poedit 软件来编辑 .po 文件。
+
+翻译词条是是一件费时费力的工作。如果使用机器辅助翻译，可以大大提高效率。
+然而，Poedit 的机翻功能是收费的。
+
+Translation-Terminator 是一位大佬(telppa @github )做的免费机翻工具。
+（项目网址：https://github.com/telppa/Translation-Terminator）
+
+网友 zj1d 利用 AHK 工具结合免费机翻工具来实现 Poedit 自动机翻。
+（原贴地址：https://www.autoahk.com/archives/37209 ）
+
+这里提供的自动机翻工具是对 zjld 的工具进行改进而成的。
+主要更新为：主程序改名为 PoTranslator.ahk，把 Translation-Terminator 升级到 2024.01 版本，默认选择百度翻译。
+
+使用说明
+
+（1） 首先你应该下载（官方主页是 https://poedit.net/）并安装 Poedit。
+
+（2） 启动 Poedit，并打开需要翻译的 PO 文件。点击菜单“查看”，勾选“未翻译条目优先”，就会把未翻译词目排在最前面。用鼠标在 Poedit 中点击第 1 个未翻译的词条，等待自动机翻。
+
+（3）点击文件 “PoTranslator运行.cmd”（实际上是执行命令“AutoHotkeyU64.exe  PoTranslator.ahk”）启动程序。程序初始化时会检查本机上是否安装了 chrome 浏览器或 微软Edge 浏览器，稍等几秒钟完成初始化之后，就会自动开始机翻工作了。（如果没有开始工作，请用鼠标在 Poedit 中点击某个 未 翻 译 的条目，就会开始自动工作）。
+
+附加说明
+（1）尽量让这个自动机翻工具在计算机上单独工作，不要同时运行其它程序做其它工作，以免互相干扰。
+（2）这个自动机翻工具有时候翻译几十条之后就会停住不动（常见的情况是待翻译词条含有英文单数和复数）。最好是有人值守，看到停止不动时就需要手工在 Poedit 中按一次 Ctrl+向下光标键，以便跳到下一个未翻译词条。
+（3） 脚本 PoTranslator.ahk 是以 AutoHotkey 1.x 格式编写的（2.x 格式有很大差别，并不兼容），所以需要使用相应版本的 AutoHotkey。这里附带的 AutoHotkeyU64.exe 是 1.x , 满足版本要求（不 要 升级到高版本）。
+
+（4）自动翻译完毕之后，有些翻译词条的头部和尾部可能有多余的空格。这里提供了一个自动去除头部空格的小工具：保持 PoEdit 运行并打开 PO 翻译文件的状态，然后双击“Potrim运行.cmd”，即可开始运行。
+
+anbangli@foxmail.com  2024-01-10
+
+（本软件是基于如下软件开发而成的。感谢原作者！）
+===================================================================
+原贴地址：https://www.autoahk.com/archives/37209
+
+poedit 自动机翻工具 帮你快速汉化软件~
+作者：zj1d
+
+po 是现在很流行的一种多语言支持文件格式 ( 咱们一般是用来汉化软件）
+poedit 是 po文件的编辑器 ( 就是一个汉化工具，但是它的机翻工具要收费）
+Translation-Terminator 是一位大佬(telppa @空 )做的翻译工具 (免费）
+项目网址：https://github.com/telppa/Translation-Terminator
+
+将以上三个东西缝合到一起，稍加修改，变成了一个无情全自动机翻工具。
+
+使用方法:
+将压缩包解药到本地
+安装 Poedit，然后打开你需要翻译的 po文件
+将脚本 AutoTranslator.ahk 拖到 autohotkey上面
+勾选“自动翻译下一句”。
+再切换到 Poedit，点击第一条需要翻译的词条。
+
+然后就开始自动翻译了…
+下载地址: 极限压缩一百兆
+https://zj1d.lanzoui.com/iPDeWuonb8b
+
+
+===================================================================
+https://www.cnblogs.com/yan5lang/archive/2010/04/01/1702639.html
+如何汉化 po 文件及编译成 mo 文件
+
+背景知识
+po文件简介
+
+　　po文件本来是用来翻译程序源代码里的字符串的。先来稍微解释一下它本来的用途，需要一点点C语言的基础才能完全理解。如果理解有困难 ，可以忽略这段内容，不会对我们使用po来翻译造成任何影响。
+
+　　目前大部分自由软件实现国际化使用的是gettext。国际化就是让程序可以使用多国语言来显示程序里的字符串。程序里一般都有很多字符串，菜单名也好，错 误信息也好，都是字符串。假设字符串为string，非国际化的程序里都是直接写"string"。如果用了gettext来实现国际化的话，就要写成 gettext("string")。有时也会看到_("string")，那实际上也是gettext，只不过通过宏的定义把 gettext改头换面了。这个string就是msgid。然后使用xgettext来从程序源代码文件产生po文件。然后交给专门的翻译人员来翻译 po。翻译人员根本不需要懂编程。翻译完毕后，使用msgfmt来把po转化成mo文件，并安装到系统里合适的位置。程序运行时，到底显示什么字符串就是 由gettext 函数来决定的了。主要有两个决定因素，一个是系统的locale及相关环境变量（LANGUAGE，LC_ALL，LC_MESSAGES和LANG）， 一个是相关的mo文件。具体可以看我的这篇 文章 。
+
+　　随着程序版本的升级，程序里的字符串的数量和内容都会发生变化，但变化不会很大，以 前翻译过的po里大部分msgid都能被重复利用。所以维护po的翻译人员在每次得到从新的程序源代码产生的po时，都用msgmerge来根据旧的已翻 译过的po来先处理一下新的未翻译的po。处理过后，大部分情况下新po就翻译的差不多了。翻译人员的工作量被大幅度减轻了。
+po文件格式解析
+
+　　po文件都是由一对对的msgid和msgstr组成的。msgid就是原文。msgstr就是译文。原文译文相互对照，所以非常适于翻译。
+
+msgid "Flash Player 9 released"
+msgstr ""
+
+　　有的msgid前面一行有fuzzy的字样。这说明，第一这个po是被msgmerge处理过的；第二，已翻译的po里没有和这个msgid完全等同的 msgid，只有非常相似的。这种情况下，msgmerge仍然会用那个相似的msgid来翻译此msgid。不过会给这个msgid标记为fuzzy， 表示翻译人员仍然要翻译这 个msgid，并在翻译后去掉上面带fuzzy的这一行。
+#, fuzzy
+msgid "Gentoo Linux PPC Handbook"
+msgstr "Gentoo Linux Alpha手册"
+
+po文件翻译的好处
+1. 原文译文相互对照，适于翻译
+2. 一篇文章里同一个msgid不管出现多少次，都只需要翻译一次
+3. 旧有的已翻译过的po，可以重复利用，不必再次翻译，且利于统一风格
+4. 有非常好的翻译工具，熟练使用后可大幅度提高工作效率
+
+
+===================================================================
+https://blog.longwin.com.tw/2010/08/windows-gettext-2010/
+
+在 Windows 使用 GetText
+要在 Windows 使用 xgettext, msgmerge, msgfmt ... 等, 要安裝哪些東西?
+
+
+WINDOWS 的 GETTEXT 工具安裝
+於 GetText for Windows (http://gnuwin32.sourceforge.net/packages/gettext.htm)下載 Binaries 版, 安裝即可. (假設安裝於 C:\gettext)
+GETTEXT 所需相關 LIBRARY 安裝
+上述套件下載後, 於 Windows XP 會缺下述兩個 Library:
+libexpat.dll
+libiconv2.dll
+可自行去尋找, 或者 直接下載 我抓好的版本 : gettext-dll.tgz
+將這兩個檔案放到 C:\gettext\bin\ 即可.
+GETTEXT 工具使用
+C:\gettext\bin\xgettext.exe --from-code=UTF-8 -d hello hello.php
+C:\gettext\bin\msgmerge.exe -o hello.po locale/zh_TW/LC_MESSAGES/hello.po hello.po
+C:\gettext\bin\msgfmt.exe -o locale/zh_TW/LC_MESSAGES/hello.mo hello.po
