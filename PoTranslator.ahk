@@ -1,6 +1,7 @@
 ﻿; PoTranslator v2024.05
 ; 使用 Poedit 自动进行词条机器翻译。要求先启动 Poedit 并打开待翻译的 .po 文件。
 ; 本程序可以选择使用不同的翻译引擎。选择方法见程序末尾处的说明。
+; 原作者：zj1d ，修改者：anbangli@foxmail.com
 
 
 ; todo:
@@ -92,8 +93,9 @@ Update:
 ;  }
 return
 
-;选择翻译引擎：下面的代码只能选择其中一个为有效语句，其它的设为注释（行首写英文分号）
-;#Include <BaiduTranslator>
-;#Include <DeepLTranslator>
-;#Include <SogouTranslator>
-#Include <YoudaoTranslator>
+;选择翻译引擎：下面四行代码分别代表四个翻译引擎（百度，搜狗，有道，DeepL），
+;只能选择其中一个为有效语句（行首 不 写 分号），其它的设为注释（行首写英文分号）。
+;#Include <BaiduTranslator>		;百度
+#Include <SogouTranslator>   	;搜狗
+;#Include <YoudaoTranslator>	;有道
+;#Include <DeepLTranslator>   	;DeepL
