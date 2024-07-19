@@ -4,3 +4,5 @@
 请在 Realease 中下载压缩包，解压缩到本机。
 
 然后阅读 “PoTranslator说明.txt” 了解使用方法。
+
+本软件使用了免费机翻工具 Translation-Terminator 提供的相关函数库。
