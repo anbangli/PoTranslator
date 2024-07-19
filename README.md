@@ -5,4 +5,4 @@
 
 然后阅读 “PoTranslator说明.txt” 了解使用方法。
 
-本软件使用了免费机翻工具 Translation-Terminator 提供的相关函数库。
+本软件使用了免费机翻工具 [Translation-Terminator](https://github.com/telppa/Translation-Terminator) 提供的相关函数库。
