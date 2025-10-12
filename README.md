@@ -11,3 +11,5 @@
 在该文档的“附加说明”部分有相关的介绍！
 
 致谢：本软件使用了免费机翻工具 [Translation-Terminator](https://github.com/telppa/Translation-Terminator) 提供的相关函数库。
+
+2025.10 更新说明：各个网络翻译引擎都改版了，而 Translation-Terminator 暂未跟进更新，本软件也不能正常工作了。
